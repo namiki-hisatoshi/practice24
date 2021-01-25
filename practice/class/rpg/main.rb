@@ -14,16 +14,24 @@ brave = Brave.new(name: "勇者", hp: 210, offense: 180, defense: 100)
 monster = Monster.new(MONSTER_LIST.sample)
 puts "#{monster.name}があらわれた！"
 
-while true
+while brave.hp > 0 && monster.hp > 0
   brave.attack(monster)
-  monster.attack(brave)
-  puts <<~TEXT
-  ========================
-  【#{brave.name}】 HP: #{brave.hp}
-  【#{monster.name}】 HP: #{monster.hp}
-  ========================
-  TEXT
-  break if brave.hp == 0 || monster.hp == 0
+  if monster.hp > 0
+    monster.attack(brave)
+    puts <<~TEXT
+    ========================
+    【#{brave.name}】 HP: #{brave.hp}
+    【#{monster.name}】 HP: #{monster.hp}
+    ========================
+    TEXT
+  else
+    puts <<~TEXT
+    ========================
+    【#{brave.name}】 HP: #{brave.hp}
+    【#{monster.name}】 HP: #{monster.hp}
+    ========================
+    TEXT
+  end
 end
 
 if monster.hp == 0
